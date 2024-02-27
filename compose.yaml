@@ -1,0 +1,5 @@
+services:
+  importer:
+    build: .
+    env_file:
+      - .env
