@@ -1,0 +1,9 @@
+[Unit]
+Description=Run market import daily
+
+[Timer]
+Unit=market-import.service
+OnCalendar=Mon..Sun 10:30
+
+[Install]
+WantedBy=timers.target

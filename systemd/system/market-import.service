@@ -1,0 +1,10 @@
+[Unit]
+Description=market reimport
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /root/market-re-import.sh
+WorkingDirectory=/root
+
+[Install]
+WantedBy=multi-user.target
