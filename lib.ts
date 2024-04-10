@@ -6,7 +6,7 @@ import {Client as PgClient} from 'pg';
 import fs from 'fs';
 import PQueue from 'p-queue';
 import JsonRpcClient from "./JsonRpcClient";
-
+// also https://github.com/filecoin-project/notary-governance/blob/ab71ebed3c4b8cd0a5940d4cae927e5afe787d19/quality-tracking-metrics.md?plain=1#L25
 export const createStatement = `CREATE TABLE IF NOT EXISTS current_state (
     deal_id INTEGER NOT NULL PRIMARY KEY,
     piece_cid TEXT NOT NULL,
