@@ -248,7 +248,15 @@ export async function processDeals(path: string, postgres: PgClient): Promise<vo
                 }
             });
         }
-        const jsonRpcClient = new JsonRpcClient('https://api.node.glif.io/rpc/v0', 'Filecoin.');
+        const jsonAuth = process.env.GLIF_AUTH;
+        if (!jsonAuth) {
+            console.error('GLIF_AUTH environment variable is not set');
+            process.exit(1);
+        }
+
+        const jsonRpcClient = new JsonRpcClient('https://api.node.glif.io/rpc/v0', 'Filecoin.', {
+            headers: { Authorization: `Bearer ${jsonAuth}` }
+        });
         for (const client of newClients) {
             await queue.onEmpty();
             queue.add(async () => {
