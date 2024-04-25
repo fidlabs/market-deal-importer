@@ -3,6 +3,7 @@ import StreamObject from "stream-json/streamers/StreamObject";
 import {stream} from "event-iterator"
 import {EventIterator} from "event-iterator/src/event-iterator";
 import {Client as PgClient} from 'pg';
+import {doMapDeals} from "./map";
 import fs from 'fs';
 import PQueue from 'p-queue';
 import JsonRpcClient from "./JsonRpcClient";
@@ -299,7 +300,11 @@ export async function handler() {
     const postgres = new PgClient({
         connectionTimeoutMillis: parseInt(process.env.POLL_CONNECTION_TIMEOUT || '0'),
     });
-    await processDeals(url, postgres);
+    if (process.env.MAP) {
+        await doMapDeals(url, postgres);
+    } else {
+        await processDeals(url, postgres);
+    }
     const response = {
         statusCode: 200
     };
