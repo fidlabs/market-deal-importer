@@ -3,3 +3,12 @@ services:
     build: .
     env_file:
       - .env
+  mapper:
+    build: .
+    env_file:
+      - .env
+    environment:
+      - MAP=yes
+    depends_on:
+      importer:
+        condition: service_completed_successfully
